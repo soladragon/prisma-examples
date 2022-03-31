@@ -154,7 +154,7 @@ export const Subscription = subscriptionType({
     t.field('newPost', {
       type: 'Post',
       subscribe(_root, _args, ctx) {
-        return ctx.pubsub.asyncIterator(['newPost'])
+        return ctx.pubsub.asyncIterator('newPost')
       },
       resolve(payload) {
         return payload
@@ -164,7 +164,7 @@ export const Subscription = subscriptionType({
     t.field('postPublished', {
       type: 'Post',
       subscribe(_root, _args, ctx) {
-        return ctx.pubsub.asyncIterator(['postPublished'])
+        return ctx.pubsub.asyncIterator('postPublished')
       },
       resolve: (payload) => {
         return payload

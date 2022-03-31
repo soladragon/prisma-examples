@@ -20,7 +20,10 @@ async function start() {
   })
 
   /** hand-in created schema and have the WS Server start listening */
-  const serverCleanup = useServer({ schema }, wsServer)
+  const serverCleanup = useServer({
+    schema,
+    context,
+  }, wsServer)
 
   const server = new ApolloServer({
     schema,
