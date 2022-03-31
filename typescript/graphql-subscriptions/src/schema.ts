@@ -70,11 +70,11 @@ export const Query = queryType({
       resolve: (_parent, args, context: Context) => {
         const or = args.searchString
           ? {
-              OR: [
-                { title: { contains: args.searchString } },
-                { content: { contains: args.searchString } },
-              ],
-            }
+            OR: [
+              { title: { contains: args.searchString } },
+              { content: { contains: args.searchString } },
+            ],
+          }
           : {}
 
         return context.prisma.post.findMany({
@@ -154,7 +154,7 @@ export const Subscription = subscriptionType({
     t.field('newPost', {
       type: 'Post',
       subscribe(_root, _args, ctx) {
-        return ctx.pubsub.asyncIterator('newPost')
+        return ctx.pubsub.asyncIterator(['newPost'])
       },
       resolve(payload) {
         return payload
@@ -164,9 +164,9 @@ export const Subscription = subscriptionType({
     t.field('postPublished', {
       type: 'Post',
       subscribe(_root, _args, ctx) {
-        return ctx.pubsub.asyncIterator('postPublished')
+        return ctx.pubsub.asyncIterator(['postPublished'])
       },
-      resolve(payload) {
+      resolve: (payload) => {
         return payload
       },
     })
