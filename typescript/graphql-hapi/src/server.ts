@@ -6,7 +6,7 @@ import { context } from './context'
 async function startServer() {
   const server = new ApolloServer({
     schema,
-    context: context,
+    context,
   })
 
   const app = Hapi.server({
