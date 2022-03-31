@@ -5,7 +5,7 @@ import { context } from './context'
 
 async function startServer() {
   const server = new ApolloServer({
-    schema: schema,
+    schema,
     context: context,
   })
 
@@ -13,6 +13,7 @@ async function startServer() {
     port: 4000,
   })
 
+  await server.start()
   await server.applyMiddleware({ app })
   await app.start()
 }
